@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>bases.io</title>
+        <meta charset = "utf-8">
+        <link rel = "stylesheet" href = "static/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Special+Elite|Tajawal:400,500,700" rel="stylesheet">
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <div class  = "page start">
+            <div class = "center">
+                <div class = "panel">
+                    <h1>bases.io</h1>
+                    <input id = "name" autocomplete="off" maxlength="20" placeholder = "enter a name..." autofocus>
+                    <a class = "button" id = "play">Play</a>
+                    <a class = "button" id = "help">Help</a>
+                </div>
+            </div>
+        </div>
+        <div class = "page">
+            <canvas id = "canvas"></canvas>
+            <div class = "center" id = "matching">
+                <h1>matching...</h1>
+                <p>waiting for <span id = "needed-players"></span> more players</p>
+                <img src = "static/img/loading.gif" width = "40px">
+            </div>
+        </div>
+        <script src = "static/script.js"></script>
+    </body>
+</html>

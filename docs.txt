@@ -1,0 +1,28 @@
+Position
+ - x
+ - y
+ - rot
+ 
+Game
+ - players: Player object (corresponds to socket.id)
+ - basePositions: array of positions of each color base,
+ - circlePos: position of circle
+    - x
+    - y
+    - s
+ - state: the current state the game is in (either matching, waiting, or playing)
+ - map
+    - size
+    
+Player
+ - name: the player's name
+ - team: the player's team
+ - pos: player's position
+ - rightHand: position of player's right hand relative to player location/rotation
+ - leftHand: position of player's left hand
+ - movement: the directions the player is currently trying to go
+    - up: true if up is pressed
+    - down
+    - left
+    - right
+ 

@@ -1,0 +1,67 @@
+html{
+    height:100%;
+}
+body{
+    margin:0px;
+    height:100%;
+    width:100%;
+    font-family: "Tajawal", sans-serif;
+    background: #429B34;
+}
+.center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    text-align: center;
+}
+h1{
+    font-family: "Special Elite", cursive;
+}
+.button{
+    display:block;
+    text-transform: lowercase;
+    font-weight: 500;
+    padding:4px;
+    cursor:pointer;
+    transition:.3s all;
+}
+.button:hover{
+    background:rgba(0,0,0,0.3);
+}
+.center .panel{
+    padding:16px;
+    box-shadow:0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
+    background:white;
+}
+input{
+    outline:none;
+    border:none;
+    background:#F5F5F5;
+    padding:8px;
+    font-size:14px;
+    text-align: center;
+}
+input:focus{
+    outline:none;
+    border:none;
+}
+.panel input{
+    margin-bottom:16px;
+}
+.page{
+    display:none;
+    height:100%;
+    overflow:hidden;
+}
+.start{
+    display:block;
+}
+#canvas{
+    width:100%;
+    height:100%;
+}
+#matching{
+    color:white;
+    display:none;
+}
