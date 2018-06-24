@@ -3,9 +3,10 @@ Position
  - y
  - rot
  
-Game
+ team order: red, green, blue, yellow
+ 
+Game (REMEMBER TO UPDATE THE EMIT WHEN ADDING A NEW FIELD)
  - players: Player object (corresponds to socket.id)
- - basePositions: array of positions of each color base,
  - circlePos: position of circle
     - x
     - y
@@ -13,6 +14,13 @@ Game
  - state: the current state the game is in (either matching, waiting, or playing)
  - map
     - size
+ - bases: array of base position, color, and hp. The index corresponds to TEAMS
+    - pos
+        - x
+        - y
+        - rot
+    - hp
+    - team
     
 Player
  - name: the player's name
@@ -26,3 +34,6 @@ Player
     - left
     - right
  
+ How to get a body's id
+ Players:
+    `player${socket.id}`

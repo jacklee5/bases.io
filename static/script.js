@@ -15,10 +15,14 @@ const STATES = {
 const COLORS = {
     GREEN: "#429B34",
     BLUE: "#407CBD",
-    SKIN: "#ffe0bd"
+    SKIN: "#FFD786",
 }
+//colors for each team
+const TEAM_COLORS = ["#FD3A68", "#00985B", "#009AFF", "#F9F871"]
 //the size of the player
 const PLAYER_SIZE = 25;
+//base size
+const BASE_SIZE = 200;
 
 //canvas setup
 let canvas = document.getElementById("canvas");
@@ -32,9 +36,6 @@ window.addEventListener("resize", () => {
     height = canvas.offsetHeight;
     canvas.width = width;
     canvas.height = height;
-    GRID_SIZE = Math.floor(Math.min(width / GRID_WIDTH, height / GRID_HEIGHT));
-    OFFSET_Y = (height - GRID_SIZE * GRID_HEIGHT) / 2;
-    OFFSET_X = (width - GRID_SIZE * GRID_WIDTH) / 2;
 });
 
 /** vivaciously vicious variables **/
@@ -93,8 +94,18 @@ const showPage = (index) => {
 const w2s = (x, y) => {
     return [x - player.pos.x + width / 2, y - player.pos.y + height / 2];
 }
+//change message
+const changeMessage = (msg) => {
+    document.getElementById("msg").style.display = "block";
+    document.getElementById("msg").textContent = msg;
+}
+//hide message thing
+const hideMessage = () => {
+    document.getElementById("msg").style.display = "none";
+}
 
 /** artsy drawy functions **/
+//draw a player
 const drawPlayer = (pos) => {
     let x = pos.x;
     let y = pos.y;
@@ -137,6 +148,12 @@ const drawPlayer = (pos) => {
     
     ctx.restore();
 }
+//draw a base
+const drawBase = (base) => {
+    ctx.fillStyle = TEAM_COLORS[base.team];
+    ctx.fillRect(...w2s(base.pos.x - BASE_SIZE / 2, base.pos.y - BASE_SIZE / 2), BASE_SIZE, BASE_SIZE);
+    console.log(base)
+}
 
 /** Fun and games **/
 //sets up the game
@@ -158,11 +175,13 @@ const startGame = () => {
         }
         game = data;
     });
+    socket.on("state change", (state) => {
+        if(state === STATES.PLAYING) hideMessage();
+    })
     
     //input event listeners
     document.addEventListener("keydown", (e) => {
         keys[e.key.toLowerCase()] = true;
-        console.log(e.key);
     });
     document.addEventListener("keyup", (e) => {
         keys[e.key.toLowerCase()] = false;
@@ -190,6 +209,10 @@ const drawGame = () => {
     if(!game || !player) return;
     if(game.state === STATES.MATCHING) return;
     
+    if(game.state === STATES.WAITING){
+        changeMessage(`Game starts in ${Math.floor(game.waitTime / 60)} seconds!`);
+    }
+    
     //draw background
     ctx.fillStyle = COLORS.BLUE;
     ctx.fillRect(0,0,width,height);
@@ -201,6 +224,11 @@ const drawGame = () => {
     //draw players
     for(let i in game.players){
         drawPlayer(game.players[i].pos)
+    }
+    
+    //draw bases
+    for(let i = 0; i < game.bases.length; i++){
+        drawBase(game.bases[i]);
     }
 }
 
