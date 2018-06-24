@@ -34,6 +34,12 @@ Player
     - left
     - right
  
- How to get a body's id
- Players:
+How to get a body's id
+Players:
     `player${socket.id}`
+Bases:
+    `base${color}`
+    EX: basered
+Surrounding walls
+    `WALL[DIRECTION]`
+    EX: WALLRIGHT
