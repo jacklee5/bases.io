@@ -23,6 +23,10 @@ const TEAM_COLORS = ["#FD3A68", "#00985B", "#009AFF", "#F9F871"]
 const PLAYER_SIZE = 25;
 //base size
 const BASE_SIZE = 200;
+//the weapon types
+const WEAPONS = {
+    FISTS: 0
+}
 
 //canvas setup
 let canvas = document.getElementById("canvas");
@@ -112,6 +116,7 @@ const drawPlayer = (pos) => {
     let rot = pos.rot;
     let leftHand = pos.leftHand;
     let rightHand = pos.rightHand;
+    console.log(leftHand);
     let coords = w2s(x,y);
     if(!(coords[0] + PLAYER_SIZE > 0 && coords[0] - PLAYER_SIZE < width && coords[1] + PLAYER_SIZE > 0 && coords[1] - PLAYER_SIZE < height)) return;
     
@@ -152,7 +157,6 @@ const drawPlayer = (pos) => {
 const drawBase = (base) => {
     ctx.fillStyle = TEAM_COLORS[base.team];
     ctx.fillRect(...w2s(base.pos.x - BASE_SIZE / 2, base.pos.y - BASE_SIZE / 2), BASE_SIZE, BASE_SIZE);
-    console.log(base)
 }
 
 /** Fun and games **/
@@ -188,6 +192,9 @@ const startGame = () => {
     });
     document.addEventListener("mousemove", (e) => {
       angle = Math.atan2((e.clientX - width / 2), (height / 2 - e.clientY));
+    });
+    document.addEventListener("click", () => {
+        socket.emit("attack");
     });
     
     //send data to server
